@@ -1,0 +1,16 @@
+﻿CREATE TABLE tbl_jpdb(
+	jpdb_id serial PRIMARY KEY NOT NULL,
+	company VARCHAR(75),
+	first_name VARCHAR(45),
+	last_name VARCHAR(45),
+	title VARCHAR(15),
+	email VARCHAR(100),
+	website VARCHAR(100),
+	workphone VARCHAR(45),
+	mobilephone VARCHAR(45),
+	address VARCHAR(100),
+	zipcode VARCHAR(15),
+	city VARCHAR(50),
+	country VARCHAR(50),
+	notes TEXT
+);	

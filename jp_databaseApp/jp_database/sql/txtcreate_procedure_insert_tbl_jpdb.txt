@@ -1,0 +1,24 @@
+﻿--This is the Stored Procedure
+create procedure insert_tbl_jpdb(
+	_company VARCHAR(75),
+	_first_name VARCHAR(45),
+	_last_name VARCHAR(45),
+	_title VARCHAR(15),
+	_email VARCHAR(100),
+	_website VARCHAR(100),
+	_workphone VARCHAR(45),
+	_mobilephone VARCHAR(45),
+	_address VARCHAR(100),
+	_zipcode VARCHAR(15),
+	_city VARCHAR(50),
+	_country VARCHAR(50),
+	_notes TEXT
+)	
+language 'plpgsql'
+as $$
+begin
+	insert into tbl_bcdb(company,first_name,last_name,title,email,website,workphone,mobilephone,address,zipcode,city,country,notes)
+	values(_company,_first_name,_last_name,_title,_email,_website,_workphone,_mobilephone,_address,_zipcode,_city,_country,_notes);
+commit;
+end;
+$$;
