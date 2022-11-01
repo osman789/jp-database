@@ -39,6 +39,32 @@ namespace jp_database
         private void Form1_Load(object sender, EventArgs e)
         {
             ReadRecords();
-        }   
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure?", "Leave Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void dgv_DoubleClick(object sender, EventArgs e)
+        {
+            txtCompany.Text = dgv.CurrentRow.Cells["company"].Value.ToString();
+            txtFirstname.Text = dgv.CurrentRow.Cells["first_name"].Value.ToString();
+            txtLastname.Text = dgv.CurrentRow.Cells["last_name"].Value.ToString();
+            txtTitle.Text = dgv.CurrentRow.Cells["title"].Value.ToString();
+            txtEmail.Text = dgv.CurrentRow.Cells["email"].Value.ToString();
+            txtWorkphone.Text = dgv.CurrentRow.Cells["workphone"].Value.ToString();
+            txtMobile.Text = dgv.CurrentRow.Cells["mobilePhone"].Value.ToString();
+            txtAddress.Text = dgv.CurrentRow.Cells["address"].Value.ToString();
+            txtZipcode.Text = dgv.CurrentRow.Cells["zipcode"].Value.ToString();
+            txtCity.Text = dgv.CurrentRow.Cells["city"].Value.ToString();
+            txtCountry.Text = dgv.CurrentRow.Cells["country"].Value.ToString();
+            txtWebsite.Text = dgv.CurrentRow.Cells["website"].Value.ToString();
+            txtNotes.Text = dgv.CurrentRow.Cells["notes"].Value.ToString();
+        }
     }
 }

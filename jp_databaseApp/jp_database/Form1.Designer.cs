@@ -45,7 +45,7 @@
             this.txtWebsite = new System.Windows.Forms.TextBox();
             this.txtLastname = new System.Windows.Forms.TextBox();
             this.txtFirstname = new System.Windows.Forms.TextBox();
-            this.Title = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.txtZipcode = new System.Windows.Forms.TextBox();
@@ -81,6 +81,7 @@
             this.dgv.RowTemplate.Height = 25;
             this.dgv.Size = new System.Drawing.Size(1838, 333);
             this.dgv.TabIndex = 0;
+            this.dgv.DoubleClick += new System.EventHandler(this.dgv_DoubleClick);
             // 
             // label1
             // 
@@ -219,12 +220,12 @@
             this.txtFirstname.Size = new System.Drawing.Size(324, 23);
             this.txtFirstname.TabIndex = 16;
             // 
-            // Title
+            // txtTitle
             // 
-            this.Title.Location = new System.Drawing.Point(80, 136);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(324, 23);
-            this.Title.TabIndex = 17;
+            this.txtTitle.Location = new System.Drawing.Point(80, 136);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(324, 23);
+            this.txtTitle.TabIndex = 17;
             // 
             // txtEmail
             // 
@@ -352,6 +353,7 @@
             this.btnQuit.TabIndex = 32;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = false;
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
             // groupBox1
             // 
@@ -428,7 +430,7 @@
             this.Controls.Add(this.txtCountry);
             this.Controls.Add(this.txtWorkphone);
             this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.Title);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.txtFirstname);
             this.Controls.Add(this.txtLastname);
             this.Controls.Add(this.txtWebsite);
@@ -477,7 +479,7 @@
         private TextBox txtWebsite;
         private TextBox txtLastname;
         private TextBox txtFirstname;
-        private TextBox Title;
+        private TextBox txtTitle;
         private TextBox txtEmail;
         private TextBox txtCity;
         private TextBox txtZipcode;
