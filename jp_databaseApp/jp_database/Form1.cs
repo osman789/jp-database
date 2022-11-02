@@ -41,6 +41,9 @@ namespace jp_database
             ReadRecords();
         }
 
+        //------------------
+        //Buttons
+        //------------------
         private void btnQuit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Leave Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -49,6 +52,17 @@ namespace jp_database
                 Application.Exit();
             }
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveRecord();
+        }
+
 
         private void dgv_DoubleClick(object sender, EventArgs e)
         {
@@ -65,6 +79,39 @@ namespace jp_database
             txtCountry.Text = dgv.CurrentRow.Cells["country"].Value.ToString();
             txtWebsite.Text = dgv.CurrentRow.Cells["website"].Value.ToString();
             txtNotes.Text = dgv.CurrentRow.Cells["notes"].Value.ToString();
+        }
+
+        private void ClearTextBoxes()
+        {
+            foreach(TextBox tb in this.Controls.OfType<TextBox>())
+            {
+                tb.Text = string.Empty;
+            }
+        }
+
+        private void SaveRecord()        // C in CRUD
+        {
+            try
+            {
+                using (NpgsqlConnection myPGConnection = new NpgsqlConnection(stdPGcon))
+                {
+                    myPGConnection.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand();
+
+                    string sql_query = "INSERT INTO tbl_jpdb(Company,first_name,last_name,title,email,website,workphone,mobilephone,address,zipcode,city,country,website,notes) VALUES" +
+                        "C'" + txtCompany.Text + "','" + txtFirstname.Text + "','" + txtLastname.Text + "','" + txtTitle.Text + "','" + txtEmail.Text + "','" + txtWebsite.Text + "','" + txtWorkphone.Text + "','" + txtMobilephone.Text + "','" +
+                    "'" + txtAddress.Text + "','" + txtZipcode.Text + "','" + txtCity.Text + "','" + txtCountry.Text + "','" + txtNotes.Text + "')";
+
+                    cmd = new NpgsqlCommand(sql_query, myPGConnection);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Record has been saved.");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close(); // this stop the empty UI to pop up.
+            }
         }
     }
 }
