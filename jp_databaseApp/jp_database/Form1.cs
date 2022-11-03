@@ -98,19 +98,47 @@ namespace jp_database
                     myPGConnection.Open();
                     NpgsqlCommand cmd = new NpgsqlCommand();
 
-                    string sql_query = "INSERT INTO tbl_jpdb(Company,first_name,last_name,title,email,website,workphone,mobilephone,address,zipcode,city,country,website,notes) VALUES" +
-                        "C'" + txtCompany.Text + "','" + txtFirstname.Text + "','" + txtLastname.Text + "','" + txtTitle.Text + "','" + txtEmail.Text + "','" + txtWebsite.Text + "','" + txtWorkphone.Text + "','" + txtMobilephone.Text + "','" +
+                    string sql_query = "INSERT INTO tbl_jpdb(Company,first_name,last_name,title,email,website,workphone,mobilephone,address,zipcode,city,country,notes) VALUES" +
+                        "('" + txtCompany.Text + "','" + txtFirstname.Text + "','" + txtLastname.Text + "','" + txtTitle.Text + "','" + txtEmail.Text + "','" + txtWebsite.Text + "','" + txtWorkphone.Text + "','" + txtMobilephone.Text + "'," +
                     "'" + txtAddress.Text + "','" + txtZipcode.Text + "','" + txtCity.Text + "','" + txtCountry.Text + "','" + txtNotes.Text + "')";
 
                     cmd = new NpgsqlCommand(sql_query, myPGConnection);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record has been saved.");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can't connect to the database [" + ex.Message + "]", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close(); // this stop the empty UI to pop up.
+            }
+        }
+
+        //-------------------
+        //-- UPDATE RECORD --
+        //-------------------
+
+        private void UpdateRecord(int id)      //U in CRUD
+        {
+            try
+            {
+                using (NpgsqlConnection myPGConnection = new NpgsqlConnection(stdPGcon))
+                {
+                    myPGConnection.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand();
+
+                    string sql_query = ("UPDATE tbl_jpdb SET company='" + txtCompany.Text + "', first_name='" + txtFirstname.Text + "', last_name='" + txtLastname.Text + "', titles='" + txtTitle.Text + "', emails='" + txtEmail.Text + "', website='" + txtWebsite.Text + "', workphone='" + txtWorkphone.Text + "', mobilephone='" + txtMobilephone.Text + "', Address='" + txtAddress.Text + "', zipcode='" + txtZipcode.Text + "', city='" + txtCity.Text + "', country='" + txtCountry.Text + "', notes='" + txtNotes.Text + "'WHERE jpdb_id=" + id);
+                    cmd = new NpgsqlCommand(sql_query, myPGConnection);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Record has been updated.");
+                    ReadRecords();
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.Close(); // this stop the empty UI to pop up.
+                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
     }
