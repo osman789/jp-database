@@ -324,6 +324,7 @@
             this.btnUpdate.TabIndex = 29;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnClear
             // 
@@ -345,6 +346,7 @@
             this.btnDelete.TabIndex = 31;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnQuit
             // 

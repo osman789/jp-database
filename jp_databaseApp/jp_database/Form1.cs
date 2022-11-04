@@ -31,7 +31,7 @@ namespace jp_database
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Can't connect to the database [", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.Close(); //this stop the empty UI to pop up.
             }
         }
@@ -39,6 +39,32 @@ namespace jp_database
         private void Form1_Load(object sender, EventArgs e)
         {
             ReadRecords();
+        }
+
+        //-----------------
+        //--DELETE RECORD--
+        //-----------------
+
+        private void DeleteRecord(int id)
+        {
+            try
+            {
+                using (NpgsqlConnection myPGConnection = new NpgsqlConnection(stdPGcon))
+                {
+                    myPGConnection.Open();
+                    string sql_query = "DELETE FROM tbl_jpdb WHERE jpdb_id=" + id;
+                    NpgsqlCommand cmd = new NpgsqlCommand();
+                    cmd = new NpgsqlCommand(sql_query, myPGConnection);
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Record has been deleted");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can't connect to the database [" + ex.Message + "]", "Dadabase Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         //------------------
@@ -63,6 +89,22 @@ namespace jp_database
             SaveRecord();
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            int recordId = Convert.ToInt32(dgv.CurrentRow.Cells["jpdb_id"].Value);
+            UpdateRecord(recordId);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                int recordId = Convert.ToInt32(dgv.CurrentRow.Cells["jpdb_id"].Value);
+                DeleteRecord(recordId);
+                ReadRecords();
+            }
+        }
 
         private void dgv_DoubleClick(object sender, EventArgs e)
         {
@@ -129,16 +171,16 @@ namespace jp_database
                     myPGConnection.Open();
                     NpgsqlCommand cmd = new NpgsqlCommand();
 
-                    string sql_query = ("UPDATE tbl_jpdb SET company='" + txtCompany.Text + "', first_name='" + txtFirstname.Text + "', last_name='" + txtLastname.Text + "', titles='" + txtTitle.Text + "', emails='" + txtEmail.Text + "', website='" + txtWebsite.Text + "', workphone='" + txtWorkphone.Text + "', mobilephone='" + txtMobilephone.Text + "', Address='" + txtAddress.Text + "', zipcode='" + txtZipcode.Text + "', city='" + txtCity.Text + "', country='" + txtCountry.Text + "', notes='" + txtNotes.Text + "'WHERE jpdb_id=" + id);
+                    string sql_query = ("UPDATE tbl_jpdb SET company='" + txtCompany.Text + "', first_name='" + txtFirstname.Text + "', last_name='" + txtLastname.Text + "', title='" + txtTitle.Text + "', email='" + txtEmail.Text + "', website='" + txtWebsite.Text + "', workphone='" + txtWorkphone.Text + "', mobilephone='" + txtMobilephone.Text + "', Address='" + txtAddress.Text + "', zipcode='" + txtZipcode.Text + "', city='" + txtCity.Text + "', country='" + txtCountry.Text + "', notes='" + txtNotes.Text + "'WHERE jpdb_id=" + id);
                     cmd = new NpgsqlCommand(sql_query, myPGConnection);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record has been updated.");
                     ReadRecords();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                MessageBox.Show("Can't connect to the database [" + ex.Message +"]", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
     }
