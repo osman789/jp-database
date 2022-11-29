@@ -86,6 +86,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 15);
@@ -95,6 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(10, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 15);
@@ -105,6 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(10, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 15);
@@ -114,6 +117,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(12, 144);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 15);
@@ -123,6 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(12, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 15);
@@ -132,6 +137,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(12, 202);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
@@ -141,6 +147,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(447, 231);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 15);
@@ -150,6 +157,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(448, 202);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 15);
@@ -159,6 +167,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(444, 173);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 15);
@@ -168,6 +177,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.White;
             this.label10.Location = new System.Drawing.Point(448, 115);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(52, 15);
@@ -177,6 +187,7 @@
             // txtMobilephone
             // 
             this.txtMobilephone.AutoSize = true;
+            this.txtMobilephone.ForeColor = System.Drawing.Color.White;
             this.txtMobilephone.Location = new System.Drawing.Point(448, 86);
             this.txtMobilephone.Name = "txtMobilephone";
             this.txtMobilephone.Size = new System.Drawing.Size(84, 15);
@@ -186,6 +197,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(448, 56);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(75, 15);
@@ -288,6 +300,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(10, 247);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(105, 15);
@@ -365,6 +378,7 @@
             this.groupBox1.Controls.Add(this.rdbLastname);
             this.groupBox1.Controls.Add(this.rdbCompany);
             this.groupBox1.Controls.Add(this.txtSearch);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(868, 390);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(980, 178);
@@ -375,6 +389,7 @@
             // rdbFirstname
             // 
             this.rdbFirstname.AutoSize = true;
+            this.rdbFirstname.ForeColor = System.Drawing.Color.White;
             this.rdbFirstname.Location = new System.Drawing.Point(890, 80);
             this.rdbFirstname.Name = "rdbFirstname";
             this.rdbFirstname.Size = new System.Drawing.Size(80, 19);
@@ -386,6 +401,7 @@
             // rdbLastname
             // 
             this.rdbLastname.AutoSize = true;
+            this.rdbLastname.ForeColor = System.Drawing.Color.White;
             this.rdbLastname.Location = new System.Drawing.Point(453, 80);
             this.rdbLastname.Name = "rdbLastname";
             this.rdbLastname.Size = new System.Drawing.Size(79, 19);
@@ -397,6 +413,7 @@
             // rdbCompany
             // 
             this.rdbCompany.AutoSize = true;
+            this.rdbCompany.ForeColor = System.Drawing.Color.White;
             this.rdbCompany.Location = new System.Drawing.Point(16, 80);
             this.rdbCompany.Name = "rdbCompany";
             this.rdbCompany.Size = new System.Drawing.Size(77, 19);
@@ -416,6 +433,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1860, 919);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);

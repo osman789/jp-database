@@ -38,6 +38,7 @@ namespace jp_database
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            StateTextBoxes(false);
             ReadRecords();
         }
 
@@ -45,7 +46,7 @@ namespace jp_database
         //--DELETE RECORD--
         //-----------------
 
-        private void DeleteRecord(int id)
+        private void DeleteRecord(int id)       // D in CRUD
         {
             try
             {
@@ -106,6 +107,9 @@ namespace jp_database
             }
         }
 
+        // ------------------
+        // Helper methods
+        // ------------------
         private void dgv_DoubleClick(object sender, EventArgs e)
         {
             txtCompany.Text = dgv.CurrentRow.Cells["company"].Value.ToString();
@@ -130,6 +134,25 @@ namespace jp_database
                 tb.Text = string.Empty;
             }
         }
+
+        private void StateTextBoxes(bool state)
+        {
+            if (state == false)
+            {
+                foreach (TextBox tb in this.Controls.OfType<TextBox>())
+                {
+                    tb.Enabled = false;
+                }
+            }
+            else if (state == true)
+            {
+                foreach (TextBox tb in this.Controls.OfType<TextBox>())
+                {
+                    tb.Enabled = true;
+                }
+            }
+        }
+
 
         private void SaveRecord()        // C in CRUD
         {
