@@ -40,6 +40,7 @@ namespace jp_database
         {
             StateTextBoxes(false);
             ReadRecords();
+            InitButtons();
         }
 
         //-----------------
@@ -71,6 +72,13 @@ namespace jp_database
         //------------------
         //Buttons
         //------------------
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            StateTextBoxes(true);
+            btnSave.Enabled = true;
+        }
+
         private void btnQuit_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure?", "Leave Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -83,17 +91,26 @@ namespace jp_database
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearTextBoxes();
+            InitButtons();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveRecord();
+            ReadRecords();
+            ClearTextBoxes();
+            StateTextBoxes(false);
+            btnSave.Enabled = false;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             int recordId = Convert.ToInt32(dgv.CurrentRow.Cells["jpdb_id"].Value);
             UpdateRecord(recordId);
+            ReadRecords();
+            ClearTextBoxes();
+            StateTextBoxes(false);
+            InitButtons();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -105,6 +122,9 @@ namespace jp_database
                 DeleteRecord(recordId);
                 ReadRecords();
             }
+            ClearTextBoxes();
+            StateTextBoxes(false);
+            InitButtons();
         }
 
         // ------------------
@@ -112,6 +132,11 @@ namespace jp_database
         // ------------------
         private void dgv_DoubleClick(object sender, EventArgs e)
         {
+            StateTextBoxes(true);
+            btnNew.Enabled = false;
+            btnUpdate.Enabled = true;
+            btnClear.Enabled = true;
+            btnDelete.Enabled = true;
             txtCompany.Text = dgv.CurrentRow.Cells["company"].Value.ToString();
             txtFirstname.Text = dgv.CurrentRow.Cells["first_name"].Value.ToString();
             txtLastname.Text = dgv.CurrentRow.Cells["last_name"].Value.ToString();
@@ -133,6 +158,7 @@ namespace jp_database
             {
                 tb.Text = string.Empty;
             }
+            StateTextBoxes(false);
         }
 
         private void StateTextBoxes(bool state)
@@ -151,6 +177,16 @@ namespace jp_database
                     tb.Enabled = true;
                 }
             }
+        }
+
+        private void InitButtons()
+        {
+            btnNew.Enabled = true;
+            btnSave.Enabled = false;
+            btnUpdate.Enabled = false;
+            btnClear.Enabled = false;
+            btnDelete.Enabled = false;
+            btnQuit.Enabled = true;      // Always true
         }
 
 
@@ -198,7 +234,6 @@ namespace jp_database
                     cmd = new NpgsqlCommand(sql_query, myPGConnection);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record has been updated.");
-                    ReadRecords();
                 }
             }
             catch (Exception ex)
@@ -206,5 +241,30 @@ namespace jp_database
                 MessageBox.Show("Can't connect to the database [" + ex.Message +"]", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (NpgsqlConnection myPGConnection = new NpgsqlConnection(stdPGcon))
+                {
+                    string sql_query = "";
+                    var database = new DataTable();
+
+                    // Building the query string(s)
+                    if (rdbCompany.Checked)
+                        sql_query = "SELECT * FROM tbl_jpdb WHERE company LIKE '%" + txtSearch.Text + "%'";
+                    if (rdbFirstname.Checked)
+                        sql_query = "SELECT * FROM tbl_jpdb WHERE first_name LIKE '%" + txtSearch.Text + "%'";
+                    if (rdbLastname.Checked)
+                        sql_query = "SELECT * FROM tbl_jpdb WHERE last_name LIKE '%" + txtSearch.Text + "%'";
+
+                    myPGConnection.Open();
+                    NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql_query, myPGConnection);
+                    da.Fill(database);
+                    dgv.DataSource = database;
+                }
+            }
+        }   
     }
 }
