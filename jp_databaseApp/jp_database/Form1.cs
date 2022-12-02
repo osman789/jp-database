@@ -154,7 +154,7 @@ namespace jp_database
 
         private void ClearTextBoxes()
         {
-            foreach(TextBox tb in this.Controls.OfType<TextBox>())
+            foreach (TextBox tb in this.Controls.OfType<TextBox>())
             {
                 tb.Text = string.Empty;
             }
@@ -238,7 +238,7 @@ namespace jp_database
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Can't connect to the database [" + ex.Message +"]", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                MessageBox.Show("Can't connect to the database [" + ex.Message + "]", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
         }
 
@@ -246,10 +246,11 @@ namespace jp_database
         {
             try
             {
+
                 using (NpgsqlConnection myPGConnection = new NpgsqlConnection(stdPGcon))
                 {
                     string sql_query = "";
-                    var database = new DataTable();
+                    var datatable = new DataTable();
 
                     // Building the query string(s)
                     if (rdbCompany.Checked)
@@ -261,10 +262,14 @@ namespace jp_database
 
                     myPGConnection.Open();
                     NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql_query, myPGConnection);
-                    da.Fill(database);
-                    dgv.DataSource = database;
+                    da.Fill(datatable);
+                    dgv.DataSource = datatable;
                 }
             }
-        }   
-    }
+            catch (Exception)
+            {
+                MessageBox.Show("Can't connect to the database", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+    } 
 }
